@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CyberSafe Learn — Offline Learning Companion</title>
+<style>
+:root{--bg:#f4f7fb;--card:#ffffff;--text:#12233a;--muted:#5a6b80;--brand:#0b6e4f;--brand2:#0a5cff;--warn:#b45309;--good:#0b6e4f;--border:#dbe4ef;--radius:18px}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+body.large-text{font-size:19px}
+body.high-contrast{--bg:#000;--card:#111;--text:#fff;--muted:#ddd;--border:#555}
+header{background:#0b2a4a;color:#fff;padding:18px 16px}
+header h1{margin:0;font-size:28px}
+header p{margin:6px 0 0;opacity:.92}
+.wrap{max-width:980px;margin:0 auto;padding:16px}
+.settings{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.settings button,.chip{border:1px solid var(--border);background:#fff;border-radius:999px;padding:8px 12px;font-size:15px;cursor:pointer}
+body.high-contrast .settings button{background:#222;color:#fff}
+.settings button[aria-pressed="true"]{background:#0b6e4f;color:#fff;border-color:#0b6e4f}
+nav{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0 18px}
+nav button{padding:14px 6px;font-size:17px;font-weight:700;border-radius:14px;border:2px solid var(--border);background:#fff;cursor:pointer}
+nav button.active{background:#0b2a4a;color:#fff;border-color:#0b2a4a}
+section{display:none}
+section.active{display:block}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin:0 0 16px}
+h2{margin-top:0;font-size:24px}
+h3{font-size:20px}
+.big-btn{display:block;width:100%;padding:20px;font-size:22px;font-weight:800;border:none;border-radius:16px;background:var(--brand);color:#fff;cursor:pointer;margin:12px 0}
+.big-btn.secondary{background:var(--brand2)}
+.progress-wrap{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.ring{width:120px;height:120px;flex:0 0 120px}
+.ring circle{fill:none;stroke-width:11}
+.ring .bg{stroke:#e2e8f0}
+.ring .fg{stroke:#0b6e4f;stroke-linecap:round;transform:rotate(-90deg);transform-origin:center}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:640px){.cards3{grid-template-columns:1fr}nav{grid-template-columns:repeat(2,1fr)}}
+.pick{border:2px solid var(--border);border-radius:16px;background:#fff;padding:18px;text-align:left;cursor:pointer;font-size:17px}
+.pick .icon{font-size:44px;display:block}
+.pick strong{display:block;font-size:19px;margin:6px 0}
+.path{border:2px solid var(--border);border-radius:16px;padding:16px;margin:12px 0;background:#fff}
+body.high-contrast .path,body.high-contrast .pick,body.high-contrast nav button{background:#222;color:#fff}
+.lesson-btn{display:block;width:100%;text-align:left;margin:8px 0;padding:14px;border:1px solid var(--border);border-radius:12px;background:#f8fafc;cursor:pointer;font-size:17px}
+.lesson-btn.done{border-color:#0b6e4f;background:#e8f7ef}
+.lesson-view{border-top:2px solid #e2e8f0;margin-top:14px;padding-top:14px}
+.rule{background:#fff7e0;border-left:6px solid #f59e0b;padding:12px;border-radius:8px}
+.quiz button{display:block;width:100%;text-align:left;margin:8px 0;padding:12px;border:1px solid var(--border);border-radius:10px;background:#fff;cursor:pointer;font-size:16px}
+.feedback{padding:12px;border-radius:10px;margin:10px 0;font-weight:700}
+.feedback.good{background:#dcfce7}
+.feedback.bad{background:#fee2e2}
+input[type=text],input[type=password],input[type=url],select{width:100%;padding:14px;font-size:17px;border:2px solid var(--border);border-radius:12px;margin:8px 0}
+.check label{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--border);border-radius:12px;margin:8px 0;background:#fff;cursor:pointer;font-size:17px}
+.check input{width:24px;height:24px;margin-top:2px}
+.badge{display:inline-block;background:#fef3c7;border:1px solid #f59e0b;border-radius:999px;padding:4px 10px;margin:4px 4px 0 0}
+#ad-slot{border:2px dashed #94a3b8;border-radius:12px;padding:12px;text-align:center;color:var(--muted);background:#f8fafc;margin:16px 0}
+#ad-slot strong{color:var(--text)}
+.small{color:var(--muted);font-size:14px}
+footer{padding:20px 16px 40px;color:var(--muted);text-align:center}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<header><div class="wrap"><h1>🛡️ CyberSafe Learn</h1><p>Learn to stay safe online — offline, private, free. No account. No data leaves your device.</p></div></header>
+<main class="wrap">
+<div class="settings" aria-label="Settings">
+<button id="btn-large" aria-pressed="false">🔎 Large text</button>
+<button id="btn-contrast" aria-pressed="false">◐ High contrast</button>
+<button id="btn-read" aria-pressed="false">🔊 Read aloud</button>
+<button id="btn-noads" aria-pressed="false">🚫 No ads</button>
+</div>
+<nav aria-label="Main sections">
+<button data-section="home" class="active">🏠 Home</button>
+<button data-section="learn">📚 Learn</button>
+<button data-section="practice">🎯 Practice</button>
+<button data-section="safety">✅ My Safety</button>
+</nav>
+
+<section id="section-home" class="active">
+<div class="card"><h2>Welcome. You are safe here.</h2>
+<p>This app teaches you, step by step, how to spot scams, protect your passwords, and keep your private life private. It works with no internet. Nothing you type here is sent anywhere.</p>
+<div class="progress-wrap">
+<svg class="ring" viewBox="0 0 120 120" role="img" aria-label="Your progress"><circle class="bg" cx="60" cy="60" r="52"/><circle class="fg" id="ring-fg" cx="60" cy="60" r="52" stroke-dasharray="326.7" stroke-dashoffset="326.7"/></svg>
+<div><div style="font-size:28px;font-weight:800" id="progress-text">0% complete</div><div id="progress-detail">0 of 18 lessons done</div><p class="small">Your progress is saved on this device only.</p></div>
+</div>
+<button class="big-btn" id="btn-continue">▶ Continue where I left off</button>
+<p class="small" id="continue-hint">Tap Continue and we will take you to your next lesson.</p>
+</div>
+<div class="card"><h2>What do you want to learn first?</h2><p>Tap a picture. You can do the others later.</p>
+<div class="cards3">
+<button class="pick" data-start="passwords"><span class="icon">🔑</span><strong>Passwords</strong>Make one strong password you can remember.</button>
+<button class="pick" data-start="scams"><span class="icon">🎣</span><strong>Spot a scam</strong>Learn the signs of a fake message.</button>
+<button class="pick" data-start="privacy"><span class="icon">🔒</span><strong>Stay private</strong>Control what you share online.</button>
+</div></div>
+<!-- ADSENSE: paste your AdSense ad code here once approved, inside the existing online-only, No-ads-respecting slot. Do not add tracking. -->
+<div id="ad-slot" role="complementary" aria-label="Sponsored content"></div>
+<div class="card"><h3>How to use this app — no manual needed</h3><ol><li><strong>Tap Home</strong> to continue.</li><li><strong>Tap Learn</strong> to choose a topic.</li><li><strong>Tap Practice</strong> to try it safely.</li><li><strong>Tap My Safety</strong> to check what you have done.</li></ol><p>One screen, one idea, one action. If you can tap a button, you can use this app.</p></div>
+</section>
+
+<section id="section-learn">
+<div class="card"><h2>📚 Learn — 6 paths, in order</h2><p>Do them in order if you can. Each lesson is 2–5 minutes: a short story, one clear rule, one try, one tiny quiz. Finish a lesson and you earn a badge.</p><div id="paths"></div><div id="lesson-view" class="lesson-view hidden"></div></div>
+</section>
+
+<section id="section-practice">
+<div class="card"><h2>🎯 Practice — safe, with pretend data only</h2><p>Nothing here is real. Use the pretend messages, links and passwords. Never type your real password or real bank details into any practice box.</p></div>
+<div class="card"><h3>1. Spot the fake message</h3><p>Read each pretend message. Is it real or a scam? Tap your answer.</p><div id="phish-list"></div><div id="phish-result"></div></div>
+<div class="card"><h3>2. Build a strong password — local checker</h3><p>Type a <em>pretend</em> password. It is checked only on this device, and never saved or sent.</p><input type="password" id="pw-input" placeholder="Try a pretend password, e.g. correct-horse-battery-staple" autocomplete="off"><div id="pw-result" aria-live="polite"></div></div>
+<div class="card"><h3>3. Check a link — before you tap it</h3><p>Paste a pretend link. We check it only on this device.</p><input type="text" id="link-input" placeholder="e.g. https://secure-bank-login.example.com" autocomplete="off"><button class="big-btn secondary" id="link-check-btn">Check this link</button><div id="link-result" aria-live="polite"></div></div>
+</section>
+
+<section id="section-safety">
+<div class="card"><h2>✅ My Safety — your checklist</h2><p>Tick what you have done. Green ticks are good. Your checklist is saved on this device only.</p><div class="check" id="checklist"></div><p><strong id="safety-score">0 of 6 done</strong></p><p class="small">If you are unsure, go back to Learn. Each item is taught in a lesson.</p></div>
+<div class="card"><h3>Your badges</h3><div id="badges"><p class="small">Finish lessons to earn badges. They appear here.</p></div></div>
+</section>
+</main>
+<footer><p>CyberSafe Learn — free, offline, private. No account. No data leaves your device. Learning content is in this file. Read-aloud depends on your browser's speech support. The ad slot, when shown, is a placeholder — no live ad network, no tracking.</p><p><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+<script>
+"use strict";
+var PATHS=[
+{id:"passwords",icon:"🔑",title:"1. Passwords and accounts",desc:"Make passwords that are strong and that you can remember. Turn on extra protection.",lessons:[
+{id:"pw1",title:"One strong password you can remember",story:"Maya used the same short password everywhere: her dog's name and 123. One website was hacked, and the thieves tried that same password on her email and her bank. They got in.",rule:"Use a passphrase: 4 random words, like 'correct horse battery staple'. Long is stronger than clever. Never reuse the same password for email and money.",tryIt:"Think of 4 random words you can picture. Say them in your head. That is your passphrase idea — do not type your real one here.",quiz:{q:"Which password is strongest?",options:["Fluffy123","correct-horse-battery-staple","Password1!"],answer:1,why:"It is long (4 words, 28 characters). Length beats short clever passwords."},badge:"Passphrase Starter"},
+{id:"pw2",title:"A different password for every important account",story:"Sam used one password for email, shopping and his bank. When the shopping site leaked, his bank was at risk too. He had to change everything in a panic.",rule:"Email and money need their own passwords. If one site leaks, the others stay safe. A password manager can remember them for you — you only remember one master passphrase.",tryIt:"List, on paper, your 3 most important accounts: email, bank, and one more. Give each a different passphrase.",quiz:{q:"Why use a different password for your email and your bank?",options:["So you can forget them faster","So one leak does not open both","So websites look nicer"],answer:1,why:"If one site leaks, thieves try the same password everywhere. Different passwords stop that."},badge:"Separate Keys"},
+{id:"pw3",title:"Turn on two-factor protection",story:"Ana's password was stolen, but the thief could not get into her email. Why? Her phone asked for a second code. That second step stopped them.",rule:"Two-factor means: something you know (password) + something you have (your phone code, or an app). Turn it on for email, bank and social media first. 'Two-factor' just means 'two checks'.",tryIt:"Open your email settings, search for 'two-factor' or '2-step'. Turn it on. Write down the backup codes on paper and keep them safe.",quiz:{q:"What does two-factor do?",options:["It asks for a second check, usually on your phone","It makes your password shorter","It shares your password with friends"],answer:0,why:"A thief needs your password AND your phone. That second check blocks most attacks."},badge:"Double Locked"}]},
+{id:"scams",icon:"🎣",title:"2. Spotting scams and phishing",desc:"'Phishing' means a fake message trying to trick you. Learn the 5 signs, then spot them.",lessons:[
+{id:"sc1",title:"The 5 signs of a fake message",story:"Leo got a message: 'URGENT! Your bank account will close in 1 hour. Tap here now!' He felt scared, so he almost tapped. Then he stopped and checked the 5 signs.",rule:"Stop and check: 1) Urgency — 'now or else'. 2) A strange sender. 3) A link that does not match. 4) They ask for a password or code. 5) Spelling or a strange greeting. One sign = pause. Two signs = do not tap.",tryIt:"Think of the last strange message you got. How many of the 5 signs did it have?",quiz:{q:"A message says 'URGENT — tap now or your account closes'. What is the safest first step?",options:["Tap the link quickly","Stop, do not tap, check the sender yourself","Reply with your password"],answer:1,why:"Urgency is a trick to make you act before you think. Stop, and go to the real app or website yourself."},badge:"Scam Spotter"},
+{id:"sc2",title:"Check the sender, not just the name",story:"A message said it was from 'Your Bank'. The name looked right, but the email was support@secure-bank-help.net, not the bank's real address. The name can be faked. The address is harder to fake.",rule:"Tap the sender's name to see the full address. If it is not the real company's address, do not trust it. When in doubt, call the company on the number on their real card or website — never the number in the message.",tryIt:"Open a real message from your bank. Find the sender's full address. Compare it with the address on the bank's real website.",quiz:{q:"The name says 'Your Bank', but the address is 'bank-support123.net'. What should you do?",options:["Trust the name","Do not tap — check the real bank yourself","Send them your card number"],answer:1,why:"Names are easy to fake. The full sender address and the real website are what matter."},badge:"Sender Checker"},
+{id:"sc3",title:"Do not tap — go there yourself",story:"Priya got a link to 'update her delivery'. Instead of tapping, she opened the delivery app herself. There was no problem. The link was a fake.",rule:"If a message has a link, do not tap it. Open the real app or type the real website yourself. This one habit stops most phishing.",tryIt:"Next time you get a link in a message, close the message and open the app yourself. Notice how calm that feels.",quiz:{q:"A text has a link to fix your delivery. What is safest?",options:["Tap the link in the text","Open the delivery app yourself","Forward the link to friends"],answer:1,why:"Going yourself means you reach the real company, not the fake page the link may lead to."},badge:"Go Yourself"}]},
+{id:"privacy",icon:"🔒",title:"3. Privacy and what you share",desc:"Photos, location and app permissions. Share less, on purpose.",lessons:[
+{id:"pr1",title:"What a photo can tell strangers",story:"Jon posted a holiday photo. In the background was his house number, and the photo had location turned on. Strangers could see where he lived, and that he was away.",rule:"Before you post a photo, check: faces, house numbers, car plates, school names, and location. Turn off location for photos, or share after you are home.",tryIt:"Open your phone's camera settings. Turn off location for photos. Look at your last 3 photos — what do they show in the background?",quiz:{q:"Why turn off location on photos?",options:["Photos look better","So strangers cannot see where the photo was taken","So your phone charges faster"],answer:1,why:"Photos can carry a hidden location. Turning it off stops strangers learning where you live or travel."},badge:"Photo Wise"},
+{id:"pr2",title:"App permissions — say no when you can",story:"A torch app asked for her contacts, her location and her microphone. A torch only needs to turn on a light. She said no to the rest.",rule:"'Permissions' means what an app is allowed to see. Only allow what the app truly needs to work. You can change permissions later in your phone settings.",tryIt:"Pick one app. Check its permissions. Turn off anything it does not need — especially location, contacts and microphone.",quiz:{q:"A calculator app asks for your contacts and microphone. What should you do?",options:["Allow everything","Say no — a calculator does not need them","Delete your phone"],answer:1,why:"Only allow what the app needs to do its job. Extra permissions are extra risk."},badge:"Permission Guard"},
+{id:"pr3",title:"Think before you share",story:"A quiz online asked for her birthday, her mother's maiden name, and her first pet. Those are the same answers many banks use to check who you are. She closed the quiz.",rule:"Birthday, mother's maiden name, first pet, first school — these are often security answers. Do not share them in quizzes, games or public posts.",tryIt:"Think of 3 facts about you that could be security answers. Keep them private, even in fun quizzes.",quiz:{q:"A fun quiz asks for your first pet's name and your birthday. Why be careful?",options:["Because quizzes are boring","Because those can be used as security answers","Because pets do not like quizzes"],answer:1,why:"Those facts are often used to prove who you are. Sharing them can help a thief pretend to be you."},badge:"Share Smart"}]}
+];
+var PATHS2=[
+{id:"devices",icon:"📱",title:"4. Your phone and computer",desc:"Updates, locking your screen, public Wi-Fi, and what to do if a device is lost.",lessons:[
+{id:"de1",title:"Keep your device updated",story:"Tom kept tapping 'Remind me later' on updates for months. One update fixed a hole that thieves were using. He was lucky. Updates close holes.",rule:"Updates are not just new features — they fix security holes. Turn on automatic updates for your phone and your apps, and restart when it asks.",tryIt:"Check for updates now. Turn on automatic updates if you can.",quiz:{q:"Why install updates?",options:["To get new colours only","To fix security holes and keep you safe","To make your phone heavier"],answer:1,why:"Updates often fix holes that attackers use. Skipping them leaves the door open."},badge:"Up To Date"},
+{id:"de2",title:"Lock your screen",story:"Sara left her phone on a café table for 2 minutes. A stranger picked it up. Because it had no lock, they could read her messages. A lock would have stopped them.",rule:"Use a PIN, pattern, fingerprint or face lock. Set it to lock in 30 seconds. A locked phone protects your messages, photos and money.",tryIt:"Set your screen to lock after 30 seconds. Test it: lock your phone, then unlock it.",quiz:{q:"What does a screen lock do?",options:["It makes calls for you","It stops strangers opening your phone if you lose it","It deletes your photos"],answer:1,why:"A lock is a simple barrier. Without it, anyone holding your phone can see everything."},badge:"Screen Locked"},
+{id:"de3",title:"Public Wi-Fi and lost devices",story:"On free airport Wi-Fi, Ben logged into his bank. He did not know that public Wi-Fi can be watched. Later he learned: do money things on mobile data, not public Wi-Fi.",rule:"On public Wi-Fi, do not log into banks or enter passwords. Use mobile data for money. If you lose a device, use 'Find my device' to lock or erase it, and change your email password first.",tryIt:"Find 'Find my device' on your phone and make sure it is on. Know how to lock it from another device.",quiz:{q:"What is safest on public Wi-Fi?",options:["Log into your bank","Avoid banking and passwords; use mobile data for money","Share your password with the café"],answer:1,why:"Public Wi-Fi can be watched. Money and passwords are safest on mobile data or at home."},badge:"Wi-Fi Wise"}]},
+{id:"money",icon:"💰",title:"5. Money, jobs, and love scams",desc:"The scams that hurt people most — told as real stories, with what to do instead.",lessons:[
+{id:"mo1",title:"Money scams: pay first, get nothing",story:"A 'job' asked Maria to pay $50 for training before she could start. She paid. The job did not exist. Real jobs pay you — you do not pay them to start.",rule:"Never pay to get a job, a prize, or a loan. Never send money or gift cards to someone you have not met. If they ask for payment first, it is a scam.",tryIt:"Remember: a real employer, bank or prize never asks for gift cards or a fee first.",quiz:{q:"A job asks you to pay $50 for training first. What is it?",options:["A normal job","A scam — real jobs pay you","A lucky break"],answer:1,why:"You do not pay to start a real job. Paying first is a classic scam sign."},badge:"Money Safe"},
+{id:"mo2",title:"Love scams: too fast, too perfect",story:"A man online told Elena he loved her in a week, then said he was stuck abroad and needed money for a ticket. His photos were stolen. His love was a script.",rule:"Be careful if someone online moves very fast, avoids video calls, has a perfect story, and then asks for money or gift cards. Real love does not ask for money. Talk to a trusted friend before you send anything.",tryIt:"If someone online asks for money, pause. Tell a trusted friend. Ask for a live video call.",quiz:{q:"Someone you met online last week asks for money for a ticket. What should you do?",options:["Send it at once","Pause, tell a trusted friend, do not send money","Send gift cards instead"],answer:1,why:"Fast love + a money request is a classic love scam. A trusted friend can help you see it clearly."},badge:"Heart Guard"},
+{id:"mo3",title:"What to do if you have been scammed",story:"David sent money to a scam. He felt ashamed and told no one for a month. When he finally told his bank, it was too late to stop it. Shame helps scammers.",rule:"If you have been scammed: 1) Stop sending money. 2) Tell your bank at once. 3) Change your passwords. 4) Tell a trusted person. 5) Report it. It is not your fault — scammers are professionals at tricking good people.",tryIt:"Save your bank's fraud number in your phone now, so you can call fast if you ever need to.",quiz:{q:"What is the first thing to do if you think you have been scammed?",options:["Hide it and hope it goes away","Stop, tell your bank at once, and tell a trusted person","Send more money to fix it"],answer:1,why:"Acting fast gives your bank the best chance to stop it, and telling someone breaks the scammer's secrecy."},badge:"Brave Reporter"}]},
+{id:"help",icon:"🤝",title:"6. Help others stay safe",desc:"Teach your family and friends, in your own words, without fear.",lessons:[
+{id:"he1",title:"Teach one person, kindly",story:"Aisha taught her grandmother one thing: 'If a message scares you, call me first.' Her grandmother did — and avoided a scam. One rule, kindly taught, was enough.",rule:"Teach one person one rule. Use kind, simple words. Never shame them for not knowing. Fear does not teach — kindness does.",tryIt:"Choose one person. Teach them one rule from this app, in your own words, today.",quiz:{q:"What is the best way to teach someone to stay safe?",options:["Shame them for mistakes","Teach one simple rule, kindly","Give them a long lecture"],answer:1,why:"One kind, simple rule is remembered. Shame makes people hide mistakes instead of asking for help."},badge:"Kind Teacher"},
+{id:"he2",title:"Make a family safety plan",story:"One family agreed: 'We never send money without calling each other first. We have a secret word for real emergencies.' When a scammer called pretending to be their son, the secret word stopped them.",rule:"Agree as a family: a secret word for emergencies, and a rule — never send money without a real call first. Write it down where everyone can see it.",tryIt:"Choose a family secret word with the people you trust. Agree: no money without a real call.",quiz:{q:"Why have a family secret word?",options:["It is fun only","It proves a real emergency call is really from your family","It makes passwords shorter"],answer:1,why:"A scammer cannot guess your secret word. It is a simple check that a call is really from family."},badge:"Family Plan"},
+{id:"he3",title:"Share what you learned — safely",story:"After finishing this app, Omar shared it with his neighbours, not his passwords. He showed them the Practice section. Soon the whole street could spot scams.",rule:"Share the app, share the lessons, share the warnings. Never share your passwords, codes or private details — even to help someone.",tryIt:"Show one person the Practice section. Let them try spotting a fake message.",quiz:{q:"What is safe to share with others?",options:["Your passwords and codes","The app, the lessons, and warnings about scams","Your bank details"],answer:1,why:"Share knowledge, not secrets. Lessons help everyone; passwords and codes help only thieves."},badge:"Community Helper"}]}
+];
+PATHS=PATHS.concat(PATHS2);
+var PHISH=[
+{from:"'Your Bank' — support@secure-bank-help.net",text:"URGENT! Your account will close in 1 hour. Tap here now to verify your password.",isPhish:true,why:"Urgent, asks for a password, and the sender address is not the real bank."},
+{from:"Your bank's app (opened by you)",text:"Your statement is ready. Open the app to view it.",isPhish:false,why:"No link, no urgency, no password request. You opened the app yourself."},
+{from:"Delivery Co — delivery@fast-track-deliver.example",text:"Your parcel is held. Pay $2 now at fast-track-deliver.example to release it.",isPhish:true,why:"Unexpected fee, a link, and a strange address. Go to the delivery app yourself."},
+{from:"A friend you know",text:"Hi, are we still meeting on Saturday at 3? Let me know!",isPhish:false,why:"No link, no money, no urgency. A normal message from someone you know."},
+{from:"'Prize Team' — win@big-prize-now.com",text:"You WON $5,000! Send $100 in gift cards to claim your prize today!",isPhish:true,why:"A prize that asks you to pay first is a scam. Real prizes do not ask for gift cards."},
+{from:"Your phone company — bills@your-real-provider.com",text:"Your bill is ready. Log in at your provider's website to view it.",isPhish:false,why:"No direct link to tap, no password request, and the address matches the real provider."}
+];
+var CHECKLIST=[
+{id:"c1",label:"I have a different, strong passphrase for my email"},
+{id:"c2",label:"I turned on two-factor for my email and bank"},
+{id:"c3",label:"My phone has a screen lock, and locks in 30 seconds"},
+{id:"c4",label:"My phone and apps are updated"},
+{id:"c5",label:"I checked app permissions and turned off what is not needed"},
+{id:"c6",label:"I know my bank's fraud number, and I have a family secret word"}
+];
+function totalLessons(){return PATHS.reduce(function(n,p){return n+p.lessons.length;},0);}
+function allLessonIds(){var out=[];PATHS.forEach(function(p){p.lessons.forEach(function(l){out.push(p.id+":"+l.id);});});return out;}
+function findLesson(pathId,lessonId){var p=null;PATHS.forEach(function(x){if(x.id===pathId)p=x;});if(!p)return null;var l=null;p.lessons.forEach(function(x){if(x.id===lessonId)l=x;});return l?{path:p,lesson:l}:null;}
+function checkPassword(pw){pw=String(pw||"");var score=0,tips=[];if(pw.length>=12)score++;else tips.push("Make it longer — 12 characters or more is best.");if(pw.length>=20)score++;if(/[a-z]/.test(pw)&&/[A-Z]/.test(pw))score++;else tips.push("Mix small and capital letters.");if(/[0-9]/.test(pw))score++;else tips.push("Add a number.");if(/[^A-Za-z0-9]/.test(pw))score++;else tips.push("Add a symbol, like - or ! .");if(pw.split(/[-_ ]/).filter(function(w){return w;}).length>=3)score++;if(/password|123456|qwerty/i.test(pw))score=0;var labels=["Very weak","Weak","Okay","Strong","Very strong","Very strong","Very strong"];var label=labels[Math.min(score,5)];if(score>=4)tips.push("Good — long and mixed. Keep it private and do not reuse it.");return{score:score,label:label,tips:tips};}
+function checkLink(url){url=String(url||"").trim();var reasons=[];var risky=false;if(!/^https?:\/\//i.test(url)){risky=true;reasons.push("It does not start with http:// or https:// — do not trust it.");}if(/^http:\/\//i.test(url)){risky=true;reasons.push("It uses http, not https. Your connection may not be private.");}if(/\d+\.\d+\.\d+\.\d+/.test(url)){risky=true;reasons.push("It uses numbers (an IP address) instead of a real website name.");}if(/bit\.ly|tinyurl|goo\.gl|t\.co/i.test(url)){risky=true;reasons.push("It is a shortened link — you cannot see where it really goes.");}if(/login|verify|secure|account|bank|free|prize|urgent/i.test(url)&&/\.xyz|\.top|\.click|\.info/i.test(url)){risky=true;reasons.push("It mixes urgent words with a strange ending like .xyz or .click.");}if(/paypa1|arnazon|micros0ft|goggle/i.test(url)){risky=true;reasons.push("The name looks misspelled — a common fake-site trick.");}if(!risky)reasons.push("No obvious danger signs were found, but always go to the real app or website yourself if you are unsure.");return{risky:risky,reasons:reasons};}
+function classifyMessage(msg){msg=String(msg||"").toLowerCase();var signs=[];if(/urgent|now|immediately|act now|account will close|within 1 hour/.test(msg))signs.push("urgency");if(/password|pin|code|verify|confirm your/.test(msg))signs.push("asks for a password or code");if(/http|tap here|click here|link/.test(msg))signs.push("has a link to tap");if(/prize|won|free money|gift card/.test(msg))signs.push("promises a prize or money");return{signs:signs,isPhish:signs.length>=2};}
+function quizAnswer(lesson,choiceIdx){return lesson&&lesson.quiz&&choiceIdx===lesson.quiz.answer;}
+function shouldShowAd(opts){opts=opts||{};if(opts.noAds)return false;if(!opts.online)return false;return true;}
+function loadProgress(store){store=store||(typeof localStorage!=="undefined"?localStorage:null);try{var raw=store?store.getItem("cyberlearn-progress-v1"):null;var p=raw?JSON.parse(raw):{};p.lessons=p.lessons||{};p.checklist=p.checklist||{};p.badges=p.badges||[];return p;}catch(e){return{lessons:{},checklist:{},badges:[]};}}
+function saveProgress(p,store){store=store||(typeof localStorage!=="undefined"?localStorage:null);if(!store)return false;try{store.setItem("cyberlearn-progress-v1",JSON.stringify(p));return true;}catch(e){return false;}}
+function completeLesson(p,pathId,lessonId){var key=pathId+":"+lessonId;var found=findLesson(pathId,lessonId);if(!found)return p;p.lessons[key]=true;if(found.lesson.badge&&p.badges.indexOf(found.lesson.badge)===-1)p.badges.push(found.lesson.badge);return p;}
+function progressPercent(p){var total=totalLessons();var done=Object.keys(p.lessons||{}).filter(function(k){return p.lessons[k];}).length;return{done:done,total:total,percent:total?Math.round(done/total*100):0};}
+function nextLesson(p){var ids=allLessonIds();for(var i=0;i<ids.length;i++){if(!p.lessons[ids[i]])return ids[i];}return null;}
+function readAloud(text){try{if(typeof speechSynthesis!=="undefined"&&speechSynthesis&&speechSynthesis.speak){speechSynthesis.cancel();speechSynthesis.speak(new SpeechSynthesisUtterance(text));return true;}}catch(e){}return false;}
+if(typeof module!=="undefined"&&module.exports){module.exports={PATHS:PATHS,PHISH:PHISH,CHECKLIST:CHECKLIST,totalLessons:totalLessons,allLessonIds:allLessonIds,findLesson:findLesson,checkPassword:checkPassword,checkLink:checkLink,classifyMessage:classifyMessage,quizAnswer:quizAnswer,shouldShowAd:shouldShowAd,loadProgress:loadProgress,saveProgress:saveProgress,completeLesson:completeLesson,progressPercent:progressPercent,nextLesson:nextLesson,readAloud:readAloud};}
+function el(id){return document.getElementById(id);}
+function showSection(name){document.querySelectorAll("section").forEach(function(s){s.classList.remove("active");});var t=el("section-"+name);if(t)t.classList.add("active");document.querySelectorAll("nav button").forEach(function(b){b.classList.toggle("active",b.getAttribute("data-section")===name);});}
+function updateProgress(p){var pr=progressPercent(p);var t=el("progress-text"),d=el("progress-detail"),r=el("ring-fg");if(t)t.textContent=pr.percent+"% complete";if(d)d.textContent=pr.done+" of "+pr.total+" lessons done";if(r)r.setAttribute("stroke-dashoffset",String(326.7*(1-pr.percent/100)));var b=el("badges");if(b)b.innerHTML=p.badges.length?p.badges.map(function(x){return '<span class="badge">🏅 '+x+'</span>';}).join(""):"<p class='small'>Finish lessons to earn badges. They appear here.</p>";}
+function renderPaths(p){var host=el("paths");if(!host)return;host.innerHTML="";PATHS.forEach(function(path){var div=document.createElement("div");div.className="path";var done=path.lessons.filter(function(l){return p.lessons[path.id+":"+l.id];}).length;div.innerHTML="<h3>"+path.icon+" "+path.title+" — "+done+"/"+path.lessons.length+" done</h3><p>"+path.desc+"</p>";path.lessons.forEach(function(l){var btn=document.createElement("button");btn.className="lesson-btn"+(p.lessons[path.id+":"+l.id]?" done":"");btn.textContent=(p.lessons[path.id+":"+l.id]?"✅ ":"")+"• "+l.title;btn.onclick=function(){openLesson(path.id,l.id,p);};div.appendChild(btn);});host.appendChild(div);});}
+function openLesson(pathId,lessonId,p){var found=findLesson(pathId,lessonId);if(!found)return;var view=el("lesson-view");view.classList.remove("hidden");var l=found.lesson;view.innerHTML="<h3>"+found.path.icon+" "+l.title+"</h3><p><strong>Story:</strong> "+l.story+"</p><div class='rule'><strong>One clear rule:</strong> "+l.rule+"</div><p><strong>Try it:</strong> "+l.tryIt+"</p><div class='quiz'><p><strong>Quick check:</strong> "+l.quiz.q+"</p></div><button class='big-btn secondary' id='lesson-read'>🔊 Read this lesson aloud</button><button class='big-btn' id='lesson-done'>✅ I finished this lesson — earn my badge</button>";var qdiv=view.querySelector(".quiz");l.quiz.options.forEach(function(opt,i){var b=document.createElement("button");b.textContent=opt;b.onclick=function(){var fb=document.createElement("div");fb.className="feedback "+(quizAnswer(l,i)?"good":"bad");fb.textContent=(quizAnswer(l,i)?"✅ Correct. ":"❌ Not quite. ")+l.quiz.why;view.insertBefore(fb,qdiv.nextSibling);if(window.__readAloud)readAloud(fb.textContent);};qdiv.appendChild(b);});el("lesson-read").onclick=function(){readAloud(l.title+". "+l.story+" Rule: "+l.rule);};el("lesson-done").onclick=function(){completeLesson(p,pathId,lessonId);saveProgress(p);updateProgress(p);renderPaths(p);renderChecklist(p);view.innerHTML="<div class='feedback good'>🎉 Well done! You earned the badge: "+l.badge+"</div><p>Tap another lesson to keep going.</p>";};view.scrollIntoView({behavior:"smooth"});if(window.__readAloud)readAloud(l.title+". "+l.story);}
+function renderPhish(){var host=el("phish-list");if(!host)return;host.innerHTML="";PHISH.forEach(function(m,i){var div=document.createElement("div");div.className="card";div.innerHTML="<p><strong>From:</strong> "+m.from+"</p><p>“"+m.text+"”</p>";["Real","Scam"].forEach(function(label){var b=document.createElement("button");b.className="lesson-btn";b.textContent=label;b.onclick=function(){var ok=(label==="Scam")===m.isPhish;var r=el("phish-result");r.innerHTML="<div class='feedback "+(ok?"good":"bad")+"'>"+(ok?"✅ Correct. ":"❌ Not quite. ")+m.why+"</div>";};div.appendChild(b);});host.appendChild(div);});}
+function renderChecklist(p){var host=el("checklist");if(!host)return;host.innerHTML="";CHECKLIST.forEach(function(c){var lab=document.createElement("label");var inp=document.createElement("input");inp.type="checkbox";inp.checked=!!p.checklist[c.id];inp.onchange=function(){p.checklist[c.id]=inp.checked;saveProgress(p);renderChecklist(p);};lab.appendChild(inp);var span=document.createElement("span");span.textContent=(inp.checked?"✅ ":"")+c.label;lab.appendChild(span);host.appendChild(lab);});var done=CHECKLIST.filter(function(c){return p.checklist[c.id];}).length;var s=el("safety-score");if(s)s.textContent=done+" of "+CHECKLIST.length+" done";}
+function updateAd(){var slot=el("ad-slot");if(!slot)return;var noAds=false;try{noAds=localStorage.getItem("cyberlearn-noads")==="1";}catch(e){}var online=(typeof navigator!=="undefined")?navigator.onLine:true;if(shouldShowAd({online:online,noAds:noAds})){slot.classList.remove("hidden");slot.innerHTML="<strong>Sponsored — this helps keep this app free for everyone.</strong><br><span class='small'>Placeholder ad slot. A real, vetted, non-tracking ad can fill this space later. No tracking code is loaded, and no data is sent.</span>";}else{slot.classList.add("hidden");slot.innerHTML="";}}
+function init(){var p=loadProgress();window.__progress=p;window.__readAloud=false;document.querySelectorAll("nav button").forEach(function(b){b.onclick=function(){showSection(b.getAttribute("data-section"));};});document.querySelectorAll("[data-start]").forEach(function(b){b.onclick=function(){showSection("learn");var f=findLesson(b.getAttribute("data-start"),PATHS.filter(function(x){return x.id===b.getAttribute("data-start");})[0].lessons[0].id);if(f)openLesson(b.getAttribute("data-start"),f.lesson.id,p);};});el("btn-continue").onclick=function(){var n=nextLesson(p);if(!n){alert("🎉 You finished all 18 lessons. Well done!");return;}var parts=n.split(":");showSection("learn");openLesson(parts[0],parts[1],p);};
+el("btn-large").onclick=function(e){document.body.classList.toggle("large-text");e.target.setAttribute("aria-pressed",document.body.classList.contains("large-text"));};
+el("btn-contrast").onclick=function(e){document.body.classList.toggle("high-contrast");e.target.setAttribute("aria-pressed",document.body.classList.contains("high-contrast"));};
+el("btn-read").onclick=function(e){window.__readAloud=!window.__readAloud;e.target.setAttribute("aria-pressed",window.__readAloud);if(window.__readAloud)readAloud("Read aloud is on. I will read lessons to you.");};
+el("btn-noads").onclick=function(e){var on=document.body.classList.toggle("noads");var v=on?"1":"0";try{localStorage.setItem("cyberlearn-noads",v);}catch(err){}e.target.setAttribute("aria-pressed",on);updateAd();};
+try{if(localStorage.getItem("cyberlearn-noads")==="1"){el("btn-noads").setAttribute("aria-pressed","true");}}catch(e){}
+var pw=el("pw-input");if(pw)pw.addEventListener("input",function(){var r=checkPassword(pw.value);var out=el("pw-result");out.innerHTML="<p><strong>"+r.label+"</strong> (score "+r.score+"/5)</p><ul>"+r.tips.map(function(t){return "<li>"+t+"</li>";}).join("")+"</ul>";});
+var lb=el("link-check-btn");if(lb)lb.onclick=function(){var v=el("link-input").value;var r=checkLink(v);var out=el("link-result");out.innerHTML="<div class='feedback "+(r.risky?"bad":"good")+"'>"+(r.risky?"⚠️ Risky link — do not tap it.":"✅ No obvious danger signs.")+"</div><ul>"+r.reasons.map(function(t){return "<li>"+t+"</li>";}).join("")+"</ul>";};
+window.addEventListener("online",updateAd);window.addEventListener("offline",updateAd);
+renderPaths(p);renderPhish();renderChecklist(p);updateProgress(p);updateAd();}
+if(typeof document!=="undefined"&&document.addEventListener){if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init);}else{try{init();}catch(e){}}}
+</script>
+</body>
+</html>

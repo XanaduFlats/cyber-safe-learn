@@ -1,0 +1,13 @@
+# ads.txt — CyberSafe Learn
+# This file tells ad networks who is allowed to sell ads on this site.
+# It is a PLACEHOLDER. Do NOT publish it as-is with a real publisher ID.
+# TO REPLACE, once Google AdSense approves this site:
+# 1. In AdSense, find your Publisher ID. It looks like pub-XXXXXXXXXXXXXXXX (16 digits).
+# 2. Replace the line below with:
+#    google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+#    (use your real pub- ID, keep the rest of the line exactly as shown)
+# 3. Upload the updated ads.txt to the root of the site (same folder as index.html).
+# Do NOT invent a publisher ID. A wrong ID means no ads and no payment.
+
+# PLACEHOLDER — replace before AdSense goes live:
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
